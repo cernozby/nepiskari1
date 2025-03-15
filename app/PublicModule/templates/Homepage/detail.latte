@@ -1,0 +1,59 @@
+{block content}
+{varType App\model\Route $route}
+    <div class="container mt-3 pt-3">
+    <div class="content">
+        <br><br>
+        <div class="card text-center">
+            <div class="card-header bg-warning text-dark">
+                {$route->getTitleCard()}
+            </div>
+            <div class="card-body">
+                <div class="card-title">
+                    <h1>{$route->getName()} - {$route->getGrade()}</h1> {$route->getStyleFormated()}
+                </div>
+                <div class="card-text text-left">{$route->get('description')|noescape} </div>
+
+                <div class="container gallery">
+                    {foreach $route->getImages() as $image}
+                        {varType  App\model\Image $image}
+                        <span class="box">
+                                    <img src="{$baseUrl}/photo/{$image->get('path')}" alt="nvm" width="100px">
+                                    <div class="caption" hidden>
+                                        <p>{$image->get('text')}</p>
+                                    </div>
+                                </span>
+                    {/foreach}
+                </div>
+
+                <div class="card-text text-left pt-2">
+                    Nejbližší cesty:
+                    {foreach $routeAround as $instance}
+                        {varType App\model\Route $instance}
+                        <a class="text-decoration-none" n:href="Homepage:detail $instance->getId()" target="_blank\">{$instance->get('toverName')} - {$instance->get('routeName')}</a>
+                         {if !$iterator->last}
+                              |
+                         {/if}
+                    {/foreach}
+                </div>
+                <br>
+                <a class="btn btn-warning" n:href="Homepage:routes"><< zpět</a>
+            </div>
+        </div>
+
+        <br><br>
+        <br>
+        <br>
+    </div>
+</div>
+    <script>
+        $('.gallery').each(function () {
+
+            $(this).lbtLightBox({
+                custom_children: ".box img",
+                captions: true,
+                captions_selector: ".caption p",
+            });
+        });
+
+    </script>
+{/block}

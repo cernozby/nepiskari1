@@ -1,0 +1,77 @@
+{block content}
+    {control routeForm}
+
+    <br>
+    <br>
+    <br>
+    {control routeGrid}
+
+    {snippet showAddImage}
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddImage" id="buttonAddImage">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAddImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Přidat foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {form addImageForm }
+                        <input n:name="idRoute" value="{$idRoute}">
+                        {input image}
+                        {input send}
+                    {/form}
+                </div>
+            </div>
+        </div>
+    </div>
+
+        {if $showAddImage}
+            <script>
+                $("#modalAddImage").modal('show');
+            </script>
+        {/if}
+    {/snippet}
+    {snippet showImageText}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalShowImageText" id="buttonShowImageText">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalShowImageText" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Text k obrázku</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {form textImageForm}
+                            <input n:name="idImage" value="{$idImage}">
+                            <input n:name="text" value="{$textImage}">
+                            {input send}
+                        {/form}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {if $showImageText}
+            <script>
+                $("#modalShowImageText").modal('show');
+            </script>
+        {/if}
+    {/snippet}
+
+
+{/block}

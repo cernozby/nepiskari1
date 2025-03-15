@@ -1,0 +1,48 @@
+{block content}
+<div class="container mt-3 pt-3" style="display: block;">
+    <div class="content" >
+        <h1>Mapa</h1>
+        <div id="mapa" style="height:400px"></div>
+    </div>
+</div>
+<script>
+
+    var center = SMap.Coords.fromWGS84(16.1224083, 50.6153475);
+    var map = new SMap(JAK.gel("mapa"), center, 15);
+    map.addDefaultLayer(SMap.DEF_TURIST).enable();
+    map.addDefaultControls();
+
+    var layer = new SMap.Layer.Marker();
+    map.addLayer(layer);
+    layer.enable();
+
+
+    var myMarkers = {};
+    var card;
+    var options = {};
+    var marker;
+
+    {foreach $routeWithGps as $routeOnTover}
+        var htmlCard = "";
+
+        {foreach $routeOnTover as $route}
+            htmlCard =  htmlCard + "<small>" + {$route->getName()} + " - " + {$route->getGrade()} + " - " + '<a href={link 'Homepage:detail', $route->getId()} target="_blank">detail</a>' + "</small> </br>";
+        {/foreach}
+        options = {
+            title: {$routeOnTover[0]->get('toverName')}
+        };
+
+        card = new SMap.Card();
+        card.getHeader().innerHTML = "<small>" + {$routeOnTover[0]->getTitleCard()} + "</small>";
+
+        card.getBody().innerHTML = htmlCard;
+        center = SMap.Coords.fromWGS84({$routeOnTover[0]->getY()}, {$routeOnTover[0]->getX()});
+        marker = new SMap.Marker(center, null, options);
+        marker.decorate(SMap.Marker.Feature.Card, card);
+
+        layer.addMarker(marker);
+
+    {/foreach}
+
+
+</script>

@@ -1,0 +1,56 @@
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+
+services:
+	router: App\Router\RouterFactory::createRouter
+	authenticator: App\model\UserManager
+	userModel:
+	    class: App\model\UserModel
+	userClass:
+	    class: App\model\userClass
+	pointModel:
+	    class: App\model\PointModel
+	routeModel:
+	    class: App\model\RouteModel
+	sectorModel:
+	    class: App\model\SectorModel
+	areaModel:
+	    class: App\model\AreaModel
+	route:
+	    class: App\model\Route
+	image:
+	    class: App\model\Image
+	imageModel:
+	    class: App\model\ImageModel
+	area:
+	    class: App\model\Area
+	view:
+	    class: App\model\View
+	viewModel:
+	    class: App\model\ViewModel
+
+	- App\components\formPoint\formPointFactory
+	- App\components\formRoute\formRouteFactory
+
+search:
+    model:
+        in: %appDir%/model
+
+database:
+	dsn: 'mysql:host=db.dw172.webglobe.com;dbname=nepiskari'
+	user: 'nepiskari_cz'
+	password: 'xolBv44po'
+
