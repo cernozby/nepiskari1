@@ -30,6 +30,17 @@
 
 	<title>{if isset($keywords)} {$keywords} {else}nepískaři.cz - Lezecké začátky v adršpachu a na křížovém vrchu. {/if}</title>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9NRS7Q66BP"></script>
+<script n:syntax="off">
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'G-9NRS7Q66BP');
+</script>
 
 <body>
 <div n:foreach="$flashes as $flash">
